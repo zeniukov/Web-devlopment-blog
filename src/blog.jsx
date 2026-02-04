@@ -1,11 +1,16 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-library.add(fas, far, fab);
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
+import { Header } from './components';
+
+const AppColumn = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 1000px;
+	min-height: 100%;
+	margin: 0 auto;
+	background-color: #fff;
+`;
 
 const Content = styled.div`
 	padding: 120px 0;
@@ -15,13 +20,11 @@ const H2 = styled.h2`
 	text-align: center;
 `;
 
-const Header = () => <div>Шапка</div>;
 const Footer = () => <div>Футер</div>;
 
 export const Blog = () => {
 	return (
-		<>
-			{/* <FontAwesomeIcon icon="fa-solid fa-cat" /> */}
+		<AppColumn>
 			<Header />
 			<Content>
 				<H2>Контент страницы</H2>
@@ -36,6 +39,6 @@ export const Blog = () => {
 				</Routes>
 			</Content>
 			<Footer />
-		</>
+		</AppColumn>
 	);
 };
