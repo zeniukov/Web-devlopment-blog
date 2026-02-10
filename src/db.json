@@ -3,9 +3,23 @@
     {
       "id": "001",
       "login": "anton",
-      "password": "qwerty123",
+      "password": "qwe123",
       "registered_at": "2050-09-22",
       "role_id": 0
+    },
+    {
+      "login": "boris",
+      "password": "qwe123",
+      "registered_at": "2063-06-30 08:52",
+      "role_id": 1,
+      "id": "UlRSDYh"
+    },
+    {
+      "login": "ivan",
+      "password": "qwe123",
+      "registered_at": "2050-02-04 03:35",
+      "role_id": 2,
+      "id": "IHfqIQm"
     }
   ],
   "roles": [
