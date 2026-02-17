@@ -1,7 +1,27 @@
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { Icon } from '../../../../../../components';
+import { useServerRequest } from '../../../../../../hooks';
+import { CLOSE_MODAL, OPEN_MODAL, removeCommentAsync } from '../../../../../../actions';
+import styled from 'styled-components';
 
-const CommentContainer = ({ className, id, author, publishedAt, content }) => {
+const CommentContainer = ({ className, postId, id, author, content, publishedAt }) => {
+	const dispatch = useDispatch();
+
+	const requestServer = useServerRequest();
+
+	const onCommentRemove = (id) => {
+		dispatch(
+			OPEN_MODAL({
+				text: 'Удалить комментарий?',
+				onConfirm: () => {
+					dispatch(removeCommentAsync(requestServer, postId, id));
+					dispatch(CLOSE_MODAL);
+				},
+				onCancel: () => dispatch(CLOSE_MODAL),
+			}),
+		);
+	};
+
 	return (
 		<div className={className}>
 			<div className="comment">
@@ -34,7 +54,7 @@ const CommentContainer = ({ className, id, author, publishedAt, content }) => {
 				margin="0 0 0 7px"
 				size="18px"
 				// disabled={isSaveButtonDisabled}
-				// onClick={() => onRoleSave(id, selectedRoleId)}
+				onClick={() => onCommentRemove(id)}
 			/>
 		</div>
 	);
