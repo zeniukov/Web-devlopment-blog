@@ -1,7 +1,28 @@
 import styled from 'styled-components';
 import { Icon } from '../../../../components';
+import { useDispatch } from 'react-redux';
+import { CLOSE_MODAL, OPEN_MODAL, removePostAsync } from '../../../../actions';
+import { useServerRequest } from '../../../../hooks';
+import { useNavigate } from 'react-router-dom';
 
-const SpecialPanelContainer = ({ className, publishedAt, editButton }) => {
+const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
+	const dispatch = useDispatch();
+	const requestServer = useServerRequest();
+	const navigate = useNavigate();
+
+	const onPostRemove = (id) => {
+		dispatch(
+			OPEN_MODAL({
+				text: 'Удалить статью?',
+				onConfirm: () => {
+					dispatch(removePostAsync(requestServer, id)).then(() => navigate('/'));
+					dispatch(CLOSE_MODAL);
+				},
+				onCancel: () => dispatch(CLOSE_MODAL),
+			}),
+		);
+	};
+
 	return (
 		<div className={className}>
 			<div className="published-at">
@@ -14,8 +35,7 @@ const SpecialPanelContainer = ({ className, publishedAt, editButton }) => {
 					id="fa-trash-can"
 					margin="0 10px 0 0"
 					size="21px"
-					// disabled={isSaveButtonDisabled}
-					// onClick={() => onRoleSave(id, selectedRoleId)}
+					onClick={() => onPostRemove(id)}
 				/>
 			</div>
 		</div>

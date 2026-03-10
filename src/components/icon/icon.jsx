@@ -6,8 +6,8 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 library.add(fas, far, fab);
 
-const IconContainer = ({ className, id, ...props }) => (
-	<div className={className} {...props}>
+const IconContainer = ({ className, id, onClick, ...props }) => (
+	<div className={className} onClick={onClick} {...props}>
 		<FontAwesomeIcon icon={id} />
 	</div>
 );
@@ -18,6 +18,6 @@ export const Icon = styled(IconContainer)`
 	color: ${({ disabled }) => (disabled ? '#ccc' : '#000')};
 
 	&: hover {
-		cursor: pointer;
+		cursor: ${({ onClick }) => (onClick ? 'pointer' : 'default')};
 	}
 `;
