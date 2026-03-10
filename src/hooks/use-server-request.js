@@ -12,6 +12,10 @@ export const useServerRequest = () => {
 				? params
 				: [session, ...params];
 
+			if (!server[operation]) {
+				throw new Error(`Server operation "${operation}" not found`);
+			}
+
 			return server[operation](...request);
 		},
 		[session],

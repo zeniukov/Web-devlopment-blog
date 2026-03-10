@@ -14,7 +14,6 @@ const ModalContainer = ({ className }) => {
 	const onConfirm = useSelector(selectModalOnConfirm);
 	const onCancel = useSelector(selectModalOnCancel);
 
-	console.log(isOpen, text, onConfirm, onCancel);
 	if (!isOpen) return null;
 
 	return (
