@@ -25,6 +25,8 @@ export const PostContainer = ({ className }) => {
 		dispatch(loadPostAsync(requestServer, params.id));
 	}, [dispatch, requestServer, params.id, isCreating]);
 
+	// console.log(post.id);
+
 	return (
 		<div className={className}>
 			<div>
