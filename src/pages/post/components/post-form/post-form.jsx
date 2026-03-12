@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Icon, Input } from '../../../../components';
 import { SpecialPanel } from '../special-panel/special-panel';
-import { useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { sanitizeContent } from './utils/sanitize-content';
 import { useDispatch } from 'react-redux';
 import { savePostAsync } from '../../../../actions';
@@ -12,33 +12,43 @@ const PostFormContainer = ({
 	className,
 	post: { id, title, imageUrl, content, publishedAt },
 }) => {
-	const imageRef = useRef(null);
-	const titleRef = useRef(null);
+	const [imageUrlValue, setImageUrlValue] = useState(imageUrl);
+	const [titleValue, setTitleValue] = useState(title);
+
 	const contentRef = useRef(null);
+
+	useLayoutEffect(() => {
+		(setImageUrlValue(imageUrl), setTitleValue(title));
+	}, [imageUrl, title]);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const requestServer = useServerRequest();
 
 	const onSave = () => {
-		const newImageUrl = sanitizeContent(imageRef.current.value);
-		const newTitle = sanitizeContent(titleRef.current.value);
 		const newContent = sanitizeContent(contentRef.current.innerHTML);
 
 		dispatch(
 			savePostAsync(requestServer, {
 				id,
-				imageUrl: newImageUrl,
-				title: newTitle,
+				imageUrl: imageUrlValue,
+				title: titleValue,
 				content: newContent,
 			}),
-		).then(() => navigate(`/post/${id}`));
+		).then(({ id }) => navigate(`/post/${id}`));
 	};
+
+	const onImageChange = ({ target }) => setImageUrlValue(target.value);
+	const onTitleChange = ({ target }) => setTitleValue(target.value);
 
 	return (
 		<div className={className}>
-			<Input ref={imageRef} defaultValue={imageUrl} placeholder="Изображение..." />
-			<Input ref={titleRef} defaultValue={title} placeholder="Заголовок..." />
+			<Input
+				value={imageUrlValue}
+				placeholder="Изображение..."
+				onChange={onImageChange}
+			/>
+			<Input value={titleValue} placeholder="Заголовок..." onChange={onTitleChange} />
 			<SpecialPanel
 				id={id}
 				publishedAt={publishedAt}
@@ -68,7 +78,10 @@ const PostFormContainer = ({
 
 export const PostForm = styled(PostFormContainer)`
 	& .post-text {
+		min-height: 80px;
+		border: 1px solid #000;
 		font-size: 18px;
 		white-space: pre-line;
+		padding: 5px;
 	}
 `;
