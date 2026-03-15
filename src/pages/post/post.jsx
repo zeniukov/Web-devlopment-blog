@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useMatch, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Comments, PostContent, PostForm } from './components';
@@ -6,12 +6,16 @@ import { useServerRequest } from '../../hooks';
 import { styled } from 'styled-components';
 import { selectPost } from '../../selectors';
 import { RESET_POST_DATA, loadPostAsync } from '../../actions';
+import { Error, PrivateContent } from '../../components';
+import { ROLE } from '../../constants';
 
 export const PostContainer = ({ className }) => {
+	const [error, setError] = useState(null);
 	const dispatch = useDispatch();
 	const params = useParams();
-	const isCreating = useMatch('/post');
-	const isEditing = useMatch('/post/:id/edit');
+	const [isLoading, setIsLoading] = useState(true);
+	const isCreating = !!useMatch('/post');
+	const isEditing = !!useMatch('/post/:id/edit');
 	const requestServer = useServerRequest();
 	const post = useSelector(selectPost);
 
@@ -20,25 +24,33 @@ export const PostContainer = ({ className }) => {
 	}, [dispatch, isCreating]);
 
 	useEffect(() => {
-		if (isCreating) return;
+		if (isCreating) {
+			setIsLoading(false);
+			return;
+		}
 
-		dispatch(loadPostAsync(requestServer, params.id));
+		dispatch(loadPostAsync(requestServer, params.id)).then((postData) => {
+			setError(postData.error);
+			setIsLoading(false);
+		});
 	}, [dispatch, requestServer, params.id, isCreating]);
 
 	// console.log(post.id);
 
-	return (
-		<div className={className}>
-			<div>
-				{isEditing || isCreating ? (
-					<PostForm post={post} />
-				) : (
-					<>
-						<PostContent post={post} />
-						<Comments comments={post?.comments} postId={post.id} />
-					</>
-				)}
+	if (isLoading) return null;
+
+	if (error) return <Error error={error} />;
+
+	return isCreating || isEditing ? (
+		<PrivateContent access={[ROLE.ADMIN]}>
+			<div className={className}>
+				<PostForm post={post} />
 			</div>
+		</PrivateContent>
+	) : (
+		<div className={className}>
+			<PostContent post={post} />
+			<Comments comments={post?.comments} postId={post.id} />
 		</div>
 	);
 };
