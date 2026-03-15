@@ -10,6 +10,7 @@ import {
 } from '../../../../selectors/';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../../actions';
+import { checkAccess } from '../../../../utils';
 
 const RightAligned = styled.div`
 	display: flex;
@@ -33,6 +34,8 @@ const ControlPanelContainer = ({ className }) => {
 		dispatch(logout(session));
 		sessionStorage.removeItem('userData');
 	};
+
+	const isAdmin = checkAccess([ROLE.ADMIN], roleId);
 
 	return (
 		<div className={className}>
@@ -59,14 +62,16 @@ const ControlPanelContainer = ({ className }) => {
 					margin="10px 0 0 0"
 					onClick={() => navigate(-1)}
 				/>
-
-				<Link to="/post">
-					<Icon id="fa-solid fa-file-lines" margin="10px 0 0 9px" />
-				</Link>
-
-				<Link to="/users">
-					<Icon id="fa-solid fa-users" margin="10px 0 0 9px" />
-				</Link>
+				{isAdmin && (
+					<>
+						<Link to="/post">
+							<Icon id="fa-solid fa-file-lines" margin="10px 0 0 9px" />
+						</Link>
+						<Link to="/users">
+							<Icon id="fa-solid fa-users" margin="10px 0 0 9px" />
+						</Link>
+					</>
+				)}
 			</RightAligned>
 		</div>
 	);

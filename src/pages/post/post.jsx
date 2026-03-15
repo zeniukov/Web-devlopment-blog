@@ -36,6 +36,7 @@ export const PostContainer = ({ className }) => {
 	}, [dispatch, requestServer, params.id, isCreating]);
 
 	// console.log(post.id);
+	console.log(post);
 
 	if (isLoading) return null;
 
