@@ -3,6 +3,7 @@ import { Icon } from '../../../../../../components';
 import { useServerRequest } from '../../../../../../hooks';
 import { CLOSE_MODAL, OPEN_MODAL, removeCommentAsync } from '../../../../../../actions';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CommentContainer = ({ className, postId, id, author, content, publishedAt }) => {
 	const dispatch = useDispatch();
@@ -82,3 +83,11 @@ export const Comment = styled(CommentContainer)`
 		display: flex;
 	}
 `;
+
+Comment.propTypes = {
+	postId: PropTypes.string.isRequired,
+	id: PropTypes.number.isRequired,
+	author: PropTypes.string.isRequired,
+	content: PropTypes.string.isRequired,
+	publishedAt: PropTypes.string.isRequired,
+};
