@@ -17,7 +17,9 @@ export const addPostComment = async (hash, userId, postId, content) => {
 
 	await addComment(userId, postId, content);
 
+	console.log(userId, postId, content);
 	const post = await getPost(postId);
+	console.log(userId, postId, content);
 
 	const commentsWithAuthor = await getPostCommentsWithAuthor(postId);
 

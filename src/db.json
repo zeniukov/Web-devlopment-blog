@@ -128,78 +128,29 @@
   ],
   "comments": [
     {
-      "author_id": "001",
-      "post_id": "IHfqIQm",
-      "published_at": "2034-12-20 17:52",
-      "content": "Иван пишет, но 'author_id': '001' и post_id = IHfqIQm",
+      "author_id": "UlRSDYh",
+      "post_id": "001",
+      "published_at": "2041-09-03 08:57",
+      "content": "Первый",
       "id": 1
     },
     {
-      "author_id": "001",
-      "post_id": "UlRSDYh",
-      "published_at": "2043-03-02 07:14",
-      "content": "Пишет Борис, но 'author_id': '001' и post_id = UlRSDYh",
+      "author_id": "UlRSDYh",
+      "post_id": "001",
+      "published_at": "2035-02-03 06:02",
+      "content": "Последний",
       "id": 2
-    },
-    {
-      "author_id": "001",
-      "post_id": "001",
-      "published_at": "2058-05-16 02:52",
-      "content": "Пишет Антон",
-      "id": 3
-    },
-    {
-      "author_id": "002",
-      "post_id": "001",
-      "published_at": "2064-05-02 11:33",
-      "content": "Пишет Антон на post_id = 002, но получает post_id = 001 и author_id = 002",
-      "id": 4
-    },
-    {
-      "author_id": "002",
-      "post_id": "IHfqIQm",
-      "published_at": "2052-05-06 18:11",
-      "content": "Пишет Иван на post_id = 002, author_id = 002 и post_id = IHfqIQm",
-      "id": 5
-    },
-    {
-      "author_id": "001",
-      "post_id": "IHfqIQm",
-      "published_at": "2045-09-06 16:14",
-      "content": "УДАЛИТЬ",
-      "id": 6
-    },
-    {
-      "author_id": "001",
-      "post_id": "IHfqIQm",
-      "published_at": "2061-12-18 18:30",
-      "content": "УДАЛИТЬ2",
-      "id": 7
-    },
-    {
-      "author_id": "001",
-      "post_id": "IHfqIQm",
-      "published_at": "2055-03-13 00:09",
-      "content": "Удалить3",
-      "id": 8
-    },
-    {
-      "author_id": "002",
-      "post_id": "IHfqIQm",
-      "published_at": "2042-08-28 17:55",
-      "content": "Удалить",
-      "id": 9
     }
   ],
   "sessions": [
     {
-      "hash": "0.25917193843868668867713722647749818861484527587891",
+      "hash": "0.01308433367773242927967203286243602633476257324219",
       "user": {
-        "id": "IHfqIQm",
-        "login": "ivan",
+        "id": "001",
+        "login": "anton",
         "password": "qwe123",
-        "registeredAt": "2050-02-04 03:35",
-        "roleId": 2
+        "registeredAt": "2050-09-22",
+        "roleId": 0
       },
       "id": 1
     }

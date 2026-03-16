@@ -14,10 +14,12 @@ const CommentsContainer = ({ className, comments, postId }) => {
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
 	const userRole = useSelector(selectUserRole);
-	console.log(userId, postId);
+	console.log(useSelector(({ user }) => user));
 
-	const onNewCommentAdd = (postId, userId, content) => {
-		dispatch(addCommentAsync(requestServer, postId, userId, content));
+	const onNewCommentAdd = (userId, postId, content) => {
+		console.log(userId, postId, content);
+		dispatch(addCommentAsync(requestServer, userId, postId, content));
+		console.log(userId, postId, content);
 		setNewComment('');
 	};
 
@@ -37,7 +39,7 @@ const CommentsContainer = ({ className, comments, postId }) => {
 						id="fa-solid fa-paper-plane"
 						margin="0 0 0 10px"
 						size="18px"
-						onClick={() => onNewCommentAdd(postId, userId, newComment)}
+						onClick={() => onNewCommentAdd(userId, postId, newComment)}
 					/>
 				</div>
 			)}
