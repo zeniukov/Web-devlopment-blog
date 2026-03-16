@@ -140,6 +140,13 @@
       "published_at": "2035-02-03 06:02",
       "content": "Последний",
       "id": 2
+    },
+    {
+      "author_id": "001",
+      "post_id": "002",
+      "published_at": "2046-05-26 01:05",
+      "content": "прив)",
+      "id": 3
     }
   ],
   "sessions": [

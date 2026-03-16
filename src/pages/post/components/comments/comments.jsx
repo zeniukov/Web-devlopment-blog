@@ -14,12 +14,9 @@ const CommentsContainer = ({ className, comments, postId }) => {
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
 	const userRole = useSelector(selectUserRole);
-	console.log(useSelector(({ user }) => user));
 
 	const onNewCommentAdd = (userId, postId, content) => {
-		console.log(userId, postId, content);
 		dispatch(addCommentAsync(requestServer, userId, postId, content));
-		console.log(userId, postId, content);
 		setNewComment('');
 	};
 
