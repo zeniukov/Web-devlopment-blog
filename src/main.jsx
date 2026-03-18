@@ -1,12 +1,19 @@
-import { StrictMode } from 'react';
+// import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Blog } from './blog';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import App from './App.jsx';
+import { Provider } from 'react-redux';
+import { store } from './store';
+
+// npx json-server --watch src/db.json --port 3005
 
 createRoot(document.getElementById('root')).render(
-	<StrictMode>
-		<App />
-	</StrictMode>,
+	<BrowserRouter>
+		<Provider store={store}>
+			<Blog />
+		</Provider>
+	</BrowserRouter>,
 );
 
 // npm install json-server@0.17.4
@@ -17,3 +24,5 @@ createRoot(document.getElementById('root')).render(
 // npm i --save @fortawesome/free-regular-svg-icons
 // npm i --save @fortawesome/free-solid-svg-icons
 // npm i --save @fortawesome/free-brands-svg-icons
+
+// npm i @hookform/resolvers
